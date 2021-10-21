@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import api from "./api";
 import Formulario from './pages/criar/index'
 import "./App.css"
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+
+import {Editarpessoa} from './pages/editar/index'
 
 class App extends Component {
   state = {
@@ -15,10 +18,7 @@ class App extends Component {
     this.setState({ dados: response.data });
   }
 
-  editarHandler = (editar) => {
-    alert(editar);
-  };
-
+  
   detalheHandler = (email) => {
     alert(email);
   };
@@ -39,8 +39,14 @@ class App extends Component {
 
   render() {
     const pessoas = this.state.dados;
+
     return (
       <div className="container">
+        <Router>
+          <Switch>
+            <Route path="/editar/:id" component={Editarpessoa}/>
+          </Switch>
+        </Router>
         <div>
           <table className="table table-responsive">
             <thead>
@@ -60,13 +66,14 @@ class App extends Component {
                   <td>{pessoa.email}</td>
                   <td>{pessoa.role}</td>
                   <td>
-                    <button
-                      className="btn btn-primary"
-                      type="button"
-                      onClick={() => this.editarHandler(pessoa.nome)}
-                    >
-                      Editar
-                    </button>
+                  <Router>
+                   <Switch>
+                    <Link to={"/editar/" + pessoa.id}>
+                      <button className="btn btn-primary" type="button">Editar</button>
+                    </Link>
+                   </Switch>
+                  </Router>
+
                   </td>
                   <td>
                     <button
@@ -88,6 +95,8 @@ class App extends Component {
           </table>
           <button type="button" id="botão" className="btn btn-primary">Cadastrar</button>
                 <Formulario />
+           <div>
+          </div>
         </div>
       </div>
     );
