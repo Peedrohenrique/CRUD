@@ -12,15 +12,18 @@ export const Editarpessoa = (props) => {
     
 
     useEffect(() => {
-        const getPessoa = async () => {
+        const getProduto = async () => {
             await fetch("http://127.0.0.1:3000/pessoas/" + id)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)
+                setEmail(responseJson.produto.email);
+                setNome(responseJson.produto.nome);
+                setRole(responseJson.produto.role);
                
             });
         }
-        getPessoa();
+        getProduto();
     }, [id]);
 
 
@@ -42,9 +45,6 @@ export const Editarpessoa = (props) => {
                   placeholder=""
                   required
                 />
-                <div className="invalid-feedback">
-                  É obrigatório inserir um nome válido.
-                </div>
               </div>
 
 
@@ -60,10 +60,6 @@ export const Editarpessoa = (props) => {
                   name="email"
                   placeholder="fulano@exemplo.com"
                 />
-                <div className="invalid-feedback">
-                  Por favor, insira um endereço de e-mail válido, para
-                  atualizações de entrega.
-                </div>
               </div>
             </div>
 
@@ -81,9 +77,6 @@ export const Editarpessoa = (props) => {
                   <option>Professor</option>
                   <option>Aluno</option>
                 </select>
-                <div className="invalid-feedback">
-                  Por favor, escolha um Curso válido.
-                </div>
               </div>
 
               
