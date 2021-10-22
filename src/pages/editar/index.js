@@ -8,6 +8,12 @@ export const Editarpessoa = (props) => {
     const [email, setEmail] = useState('');
     const [nome, setNome] = useState('');
     const [role, setRole] = useState('');
+
+
+    const editProduto = async e => {
+        e.preventDefault();
+        console.log(nome)
+    }
    
     
 
@@ -20,7 +26,6 @@ export const Editarpessoa = (props) => {
                 setEmail(responseJson.produto.email);
                 setNome(responseJson.produto.nome);
                 setRole(responseJson.produto.role);
-               
             });
         }
         getProduto();
@@ -33,7 +38,7 @@ export const Editarpessoa = (props) => {
           <h1 className="mb-3 display-4 my-5">Editar</h1>
 
           {/*   Input de NOME COMPLETO  */}
-          <form className="needs-validation my-5" novalidate>
+          <form className="needs-validation my-5" novalidate onSubmit={editProduto}>
             <div className="row">
               <div className="col-md-8 mb-3">
                 <label for="primeiroNome">Nome Completo</label>
