@@ -1,34 +1,49 @@
 import React, { useEffect, useState } from 'react';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  BrowserRouter,
+} from "react-router-dom";
 
 
-export const Editarpessoa = (props) => {
+
+export const EditPessoa = (props) => {
 
     const [id] = useState(props.match.params.id);
-    const [email, setEmail] = useState('');
     const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
     const [role, setRole] = useState('');
 
 
-    const editProduto = async e => {
+    const Edit = async e => {
         e.preventDefault();
-        console.log(nome)
+        
+        await fetch("http://127.0.0.1:3000/pessoas/" + id, {
+          method: 'PUT',
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ id, nome, email, role })
+        }).then((res) => res.json())
     }
    
     
 
     useEffect(() => {
-        const getProduto = async () => {
-            await fetch("http://127.0.0.1:3000/pessoas/" + id)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson)
-                setEmail(responseJson.produto.email);
-                setNome(responseJson.produto.nome);
-                setRole(responseJson.produto.role);
+        const getPessoa = async () => {
+            await fetch(`http://127.0.0.1:3000/pessoas/${id}`)
+            .then((res) => res.json())
+            .then((resJson) => {
+                setNome(resJson.nome);
+                setEmail(resJson.email);
+                setRole(resJson.role);
+              
             });
         }
-        getProduto();
+        getPessoa();
     }, [id]);
 
 
@@ -38,7 +53,7 @@ export const Editarpessoa = (props) => {
           <h1 className="mb-3 display-4 my-5">Editar</h1>
 
           {/*   Input de NOME COMPLETO  */}
-          <form className="needs-validation my-5" novalidate onSubmit={editProduto}>
+          <form className="needs-validation my-5" novalidate onSubmit={Edit}>
             <div className="row">
               <div className="col-md-8 mb-3">
                 <label for="primeiroNome">Nome Completo</label>
@@ -90,14 +105,19 @@ export const Editarpessoa = (props) => {
               <div class="form-row text-center">
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary">
-                  editar
+                  Editar
                   </button>
                 </div>
               </div>
             </div>
           </form>
+          <Link to={"/"}>
+        <button type="submit" id="botãoForaDoForm" className="btn btn-warning">
+          Listar
+        </button>
+      </Link>
         </div>
     )
 }
 
-export default Editarpessoa;
+export default EditPessoa;

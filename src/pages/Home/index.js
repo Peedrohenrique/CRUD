@@ -65,13 +65,10 @@ class Home extends Component {
                   </td>
 
                   <td>
-                    <button
-                      className="btn btn-warning"
-                      type="button"
-                      onClick={() => this.detalheHandler(pessoa.email)}
-                    >
+                    <Link to={"/detalhes/" + pessoa.id}><button className="btn btn-warning"type="button">
                       Detalhes
                     </button>
+                    </Link>
                   </td>
                   <td>
                     <button onClick={() => this.apagarPessoa(pessoa.id)} className="btn btn-danger" type="button">
