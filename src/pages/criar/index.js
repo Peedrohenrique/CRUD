@@ -59,12 +59,11 @@ export const Formulario = () => {
     /* Título */
     <div className=" container col-md-6 order-md-1">
       <h1 className="mb-3 display-4 my-5">Cadastrar-se</h1>
-  
-        {status.type === "erro" ? <div id="Alert" class="alert alert-danger" role="alert">{status.mensagem}</div> : ""}
-        {status.type === "success" ? <div id="Alert" class="alert alert-success" role="alert">{status.mensagem}</div> : ""}
 
       {/*   Input de NOME COMPLETO  */}
       <form className="needs-validation my-5" novalidate onSubmit={cadPessoa}>
+      {status.type === "erro" ? <div id="Alert" class="alert alert-danger" role="alert">{status.mensagem}</div> : ""}
+        {status.type === "success" ? <div id="Alert" class="alert alert-success" role="alert">{status.mensagem}</div> : ""}
         <div className="row">
           <div className="col-md-8 mb-3">
             <label for="primeiroNome">Nome Completo</label>
@@ -129,8 +128,8 @@ export const Formulario = () => {
             </div>
             <div>
             <Link to={"/"}>
-        <button type="submit" id="botãoListar" className="btn btn-warning">
-          Listar
+        <button type="submit" className="btn btn-warning bb">
+          Voltar
         </button>
       </Link>
             </div>

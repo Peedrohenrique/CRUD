@@ -24,13 +24,9 @@ form {
   animation-duration: 1s;
 }
 
-#botãoListar {
-  margin-left: 2px;
-  margin-top: -186px;
-  animation-name: fade;
-  animation-duration: 3s;
+.bb {
+  margin: 6px;
 }
-
 
 .form-control {
   display: block;
@@ -49,12 +45,8 @@ form {
 }
 
 .alert {
-  position: relative;
   text-align: center;
   border-radius: 14px;
-  margin: 16px;
-  margin-left: 200px;
-  margin-right: 200px
 }
 
 @media (min-width: 320px) and (max-width: 741px) {
